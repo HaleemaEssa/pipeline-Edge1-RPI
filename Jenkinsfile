@@ -35,7 +35,15 @@ pipeline {
           }
         }
          
-        
+        stage('On-RPI') {
+          agent {label 'linuxslave1'}
+          steps {
+            sh 'echo "rpi" '
+            git branch: 'main', url: 'https://github.com/HaleemaEssa/first_jenkins_project.git'
+           // sh 'docker build -t haleema/docker-rpi:latest .'
+            sh 'docker run --privileged -t haleema/docker-rpi'
+          }
+        }
          
        
       }
